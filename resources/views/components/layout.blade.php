@@ -7,9 +7,7 @@
     <title>{{ $title }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 </head>
-<body>
-
+<body class="container mx-auto col-md-12">
     {{ $slot }}
-
 </body>
 </html>
