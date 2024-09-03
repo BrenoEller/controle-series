@@ -1,6 +1,6 @@
 <x-layout title="Séries">
     
-    <div class="p-5 col-md-6">
+    <div class="p-5 col-md-12">
         <ul class="list-group mt-1">
             @foreach ($seasons as $season)
                 <li class="list-group-item d-flex justify-content-between align-items-center">

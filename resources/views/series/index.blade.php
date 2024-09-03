@@ -1,5 +1,5 @@
 <x-layout title="Séries">
-    <div class="p-5 col-md-6">
+    <div class="p-5 col-md-12">
         <h1>Séries</h1>
 
         @isset($mensagemSucesso)
