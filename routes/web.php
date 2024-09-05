@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SeasonsController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SeriesController::class, 'index']);
@@ -17,4 +19,9 @@ Route::controller(SeriesController::class)->group(function() {
 
 Route::controller(SeasonsController::class)->group(function() {
     Route::get('/series/{series}/seasons', 'index')->name('seasons.index');
+});
+
+Route::controller(EpisodesController::class)->group(function() {
+    Route::get('/series/{season}/episodes', 'index')->name('episodes.index');
+    Route::post('/series/{season}/episodes', 'update')->name('episodes.update');
 });
