@@ -27,5 +27,7 @@ class LoginController extends Controller
     public function destroy()
     {
         Auth::logout();
+
+        return redirect('login');
     }
 }

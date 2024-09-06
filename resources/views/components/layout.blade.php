@@ -10,7 +10,9 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Home</a>
-      <a href="{{ route('logout')}}">Sair</a>
+      @auth
+        <a href="{{ route('logout') }}">Sair</a>
+      @endauth
     </div>
   </nav>
 <body class="container mx-auto col-md-12">
