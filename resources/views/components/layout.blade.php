@@ -7,6 +7,12 @@
     <title>{{ $title }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 </head>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Home</a>
+      <a href="{{ route('logout')}}">Sair</a>
+    </div>
+  </nav>
 <body class="container mx-auto col-md-12">
     @if ($errors->any())
         <div class="alert alert-danger">
