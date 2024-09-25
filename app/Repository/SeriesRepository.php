@@ -13,7 +13,9 @@ class SeriesRepository
     public function add(SeriesFormRequest $request)
     {
         return DB::transaction(function() use($request) {
-            $serie = Series::create($request->all());
+            $serie = Series::create([
+                            'nome'=> $request->nome,
+                            'cover'=> $request->coverPath]);
             $seasons = [];
             for ($i = 1; $i <= $request->seasonsQty; $i++) {
                 $seasons[] = [
