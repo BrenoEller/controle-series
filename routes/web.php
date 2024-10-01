@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiSeriesController;
 use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SeasonsController;
@@ -39,4 +40,8 @@ Route::middleware(\App\Http\Middleware\Autenticador::class)->group(function() {
         Route::put('/series/{series}', 'update')->name('series.update');
         Route::delete('/series/destroy/{serie}', 'destroy')->name('series.destroy');
     });
+});
+
+Route::controller(ApiSeriesController::class)->group(function() {
+    Route::get('/api/series', 'index');
 });
