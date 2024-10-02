@@ -7,6 +7,7 @@ use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 Route::controller(LoginController::class)->group(function() {
     Route::get('/login', 'index')->name('login');
@@ -42,6 +43,12 @@ Route::middleware(\App\Http\Middleware\Autenticador::class)->group(function() {
     });
 });
 
-Route::controller(ApiSeriesController::class)->group(function() {
-    Route::get('/api/series', 'index');
+Route::prefix('api')->group(function () {
+    Route::controller(ApiSeriesController::class)->group(function() {
+        Route::get('/series', 'index');
+        Route::get('/series/{series}', 'show');
+        Route::put('/series/{series}', 'update')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
+        Route::delete('/series/{series}', 'destroy')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
+        Route::post('/series', 'store')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]); 
+    });
 });
