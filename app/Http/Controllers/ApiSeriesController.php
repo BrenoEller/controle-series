@@ -26,9 +26,12 @@ class ApiSeriesController extends Controller
 
     public function show(int $series)
     {
-        $series = Series::with('seasons')->get();
+        $seriesModel = Series::with('seasons.episodes')->find($series);
+        if($seriesModel == null) {
+            return response()->json(['message' => 'Series not found'], 404);
+        }
 
-        return $series;
+        return $seriesModel->with('seasons.episodes')->get();
     }
 
     public function update(Series $series, SeriesFormRequest $request)
@@ -44,5 +47,13 @@ class ApiSeriesController extends Controller
         Series::destroy($series);
 
         return response()->noContent();
+    }
+
+    public function findSeriesPerSeason(Series $series) {
+        return $series->seasons;
+    }
+
+    public function findSeriesPerEpisodes(Series $series) {
+        return $series->episodes;
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Http\Request;
 
 Route::controller(LoginController::class)->group(function() {
     Route::get('/login', 'index')->name('login');
@@ -45,10 +46,18 @@ Route::middleware(\App\Http\Middleware\Autenticador::class)->group(function() {
 
 Route::prefix('api')->group(function () {
     Route::controller(ApiSeriesController::class)->group(function() {
+        Route::get('/series/{series}/seasons', 'findSeriesPerSeason');
+        Route::get('/series/{series}/episodes', 'findSeriesPerEpisodes');
         Route::get('/series', 'index');
         Route::get('/series/{series}', 'show');
         Route::put('/series/{series}', 'update')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
         Route::delete('/series/{series}', 'destroy')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
         Route::post('/series', 'store')->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]); 
+        Route::patch('/episodes/{episode}', function (\App\Models\Episode $episode, Request $request) {
+            $episode->watched = $request->watched;
+            $episode->save();
+        
+            return $episode;
+        });
     });
 });
