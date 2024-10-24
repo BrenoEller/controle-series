@@ -7,7 +7,6 @@ use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
-use illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 
 Route::controller(LoginController::class)->group(function() {
